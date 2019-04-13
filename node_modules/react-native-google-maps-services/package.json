@@ -1,0 +1,51 @@
+{
+  "name": "react-native-google-maps-services",
+  "version": "0.5.1",
+  "author": "Ho Yin Cheng",
+  "description": "React Native client library for Google Maps API Web Services",
+  "main": "./lib",
+  "contributors": [
+    {
+      "name": "Ho Yin Cheng",
+      "email": "ho.yin.cheng@lovescomputers.com"
+    }
+  ],
+  "scripts": {
+    "test": "jasmine && jasmine spec/e2e/*.js",
+    "jsdoc": "jsdoc -c docs/conf.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hysan/react-native-google-maps-services.git"
+  },
+  "keywords": [
+    "google",
+    "maps",
+    "googlemaps",
+    "geo",
+    "geocode",
+    "timezone",
+    "api",
+    "client",
+    "roads",
+    "directions",
+    "navigation"
+  ],
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/hysan/react-native-google-maps-services/issues"
+  },
+  "homepage": "https://github.com/hysan/react-native-google-maps-services",
+  "dependencies": {
+    "buffer": "^5.0.8",
+    "crypto-js": "^3.1.9-1",
+    "axios": "^0.17.1"
+  },
+  "devDependencies": {
+    "jasmine": ">=2.3.2 <2.5.0",
+    "jsdoc": "^3.4.0",
+    "priorityqueuejs": "^1.0.0",
+    "q": "^1.4.1"
+  },
+  "files": ["lib"]
+}
