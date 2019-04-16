@@ -1,0 +1,19 @@
+{
+    "school": {
+        "awscloudformation": {
+            "AuthRoleName": "project-3-20190414191642-authRole",
+            "UnauthRoleArn": "arn:aws:iam::525171747197:role/project-3-20190414191642-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::525171747197:role/project-3-20190414191642-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "project-3-20190414191642-deployment",
+            "UnauthRoleName": "project-3-20190414191642-unauthRole",
+            "StackName": "project-3-20190414191642",
+            "StackId": "arn:aws:cloudformation:us-west-2:525171747197:stack/project-3-20190414191642/82bd82b0-5f24-11e9-b19a-02a37d7e05c4"
+        },
+        "categories": {
+            "auth": {
+                "cognitoa6b8d450": {}
+            }
+        }
+    }
+}
