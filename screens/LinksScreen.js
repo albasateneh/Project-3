@@ -2,19 +2,19 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { Constants, MapView, Location, Permissions } from 'expo';
 import SearchBar from './searchbar'
+
 var googleMapsClient = require('react-native-google-maps-services').createClient({
   key: 'AIzaSyArlF_dWAiCAliK_BkP7yAgeqgtUcRMcW8'
 });
-// Geocode an address.
 
 googleMapsClient.geocode({
-  address: 'Pauls Cocktials Orange'
+  address: 'moscow russia'
 }, function(err, response) {
   if (!err) {
-    console.log(response.json.results);
+    console.log(response.json.results[0].geometry.location);
     this.setState({
-      lat: response.json.results.location.lat,
-      lng: response.json.results.location.lng
+      lat: response.json.results[0].geometry.location.lat,
+      lng: response.json.results[0].geometry.location.lng
     })
   }
 });
@@ -27,26 +27,7 @@ export default class App extends Component {
     location: {coords: { latitude: 37.78825, longitude: -122.4324}},
   };
 
-  componentDidMount() {
-    this._getLocationAsync();
-  }
-
-  _handleMapRegionChange = mapRegion => {
-    this.setState({ mapRegion });
-  };
-
-  _getLocationAsync = async () => {
-   let { status } = await Permissions.askAsync(Permissions.LOCATION);
-   if (status !== 'granted') {
-     this.setState({
-       locationResult: 'Permission to access location was denied',
-       location,
-     });
-   }
-
-   let location = await Location.getCurrentPositionAsync({});
-   this.setState({ locationResult: JSON.stringify(location), location, });
- };
+   
 
   render() {
     return (
@@ -59,8 +40,8 @@ export default class App extends Component {
         >
     <MapView.Marker
       coordinate={this.state.location.coords}
-      title="My Marker"
-      description="Some description"
+      title="It's Lit Bruhhhh"
+      description="DEEEEEEETTSSSSS BRUUUHHHHH"
     />
         </MapView>
         
