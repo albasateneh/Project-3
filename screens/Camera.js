@@ -1,26 +1,19 @@
 import React from 'react';
 import { View, Text, Button } from 'react-native';
-import { Camera, Permissions, Video } from 'expo';
+import { Camera, Permissions, Video, } from 'expo';
 
 import styles from './camera/styles';
 import Toolbar from './camera/toolbar.component';
 import Gallery from './camera/gallery.component';
 
 export default class CameraPage extends React.Component {
-    static navigationOptions = ({navigation}) => {
-        return {
-            headerTitle:'Camera',
-        headerRight: (
-            <Button 
-            onPress={()=>this.props.navigation.navigate('View')}
-            title="View Posts"
-            color="#fff"
+    static navigationOptions= ({navigation})=>({
+        title: 'Camera',
+        headerRight:<Button
+        title="View Posts"
+        onPress={()=>navigation.navigate('View')}
         />
-        ),
-    }
-
-    };
-    
+    })
     camera = null;
 
     state = {
