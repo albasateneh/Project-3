@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
+import MapView, { PROVIDER_GOOGLE} from 'react-native-maps'
 import { SearchBar } from 'react-native-elements';
 import axios from 'axios';
 
 
-var googleMapsClient = require('react-native-google-maps-services').createClient({
+/* var googleMapsClient = require('react-native-google-maps-services').createClient({
   key: 'AIzaSyArlF_dWAiCAliK_BkP7yAgeqgtUcRMcW8'
 });
 
@@ -18,7 +18,7 @@ googleMapsClient.geocode({
       lng: response.json.results[0].geometry.location.lng
     })
   }
-});
+});*/
 
 
 export default class MapScreen extends Component {
@@ -26,7 +26,7 @@ export default class MapScreen extends Component {
     super(props);
     this.state = {
       locationInput: '',
-      locationCoordinates: {
+      locationCoordinates:  {
           latitude: 37.7749,
           longitude: -122.4194,
           latitudeDelta: 0.0922,
@@ -61,12 +61,11 @@ export default class MapScreen extends Component {
   handleSubmit(textInput) {
     axios.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + this.state.locationInput.split(' ').join('') + "&key=" + 'AIzaSyArlF_dWAiCAliK_BkP7yAgeqgtUcRMcW8')
     .then(response => this.updateLocationCoordinates(response))
-    .catch(error => console.log("Failjax: ", error))
   }
 
   handleLocationChange(response){
     this.setState({
-      locationCoordiante: response
+      locationCoordinates: response
     })
   }
    
@@ -86,9 +85,7 @@ export default class MapScreen extends Component {
           style={{ flex: 1}}
           customMapStyle={mapStyle}
           region={ this.state.locationCoordinates }
-          onRegionChange={this.handleLocationChange}
-          zoomEnabled={true}
-          scrollEnabled={true}
+         
         >
     <MapView.Marker
       coordinate={this.state.locationCoordinates}
@@ -96,6 +93,7 @@ export default class MapScreen extends Component {
       description="DEEEEEEETTSSSSS BRUUUHHHHH"
     />
         </MapView>
+        
         
 
        {/*  <Text>
