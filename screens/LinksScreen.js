@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import MapView, { PROVIDER_GOOGLE} from 'react-native-maps'
+import { Text, View, StyleSheet, Image, Button } from 'react-native';
+import MapView, { PROVIDER_GOOGLE, Marker, Callout} from 'react-native-maps'
 import { SearchBar } from 'react-native-elements';
 import axios from 'axios';
-
+import CameraPage from './HomeScreen'
 
 /* var googleMapsClient = require('react-native-google-maps-services').createClient({
   key: 'AIzaSyArlF_dWAiCAliK_BkP7yAgeqgtUcRMcW8'
@@ -73,7 +73,7 @@ export default class MapScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-      <SearchBar
+      <SearchBar 
         placeholder="What's Lit?"
        onChangeText={this.handleLocationInput}
        value={this.state.locationInput}
@@ -88,10 +88,21 @@ export default class MapScreen extends Component {
          
         >
     <MapView.Marker
-      coordinate={this.state.locationCoordinates}
-      title="It's Lit Bruhhhh"
-      description="DEEEEEEETTSSSSS BRUUUHHHHH"
-    />
+    coordinate={this.state.locationCoordinates}
+    title="It's Lit Bruhhhh"
+    description=""
+    image={require('./Images/Fire-512.png')}
+    
+    >
+    <MapView.Callout
+    >
+    <View style={{width: 100, height: 100 }}>
+       
+        </View>
+
+    </MapView.Callout>
+    
+      </MapView.Marker>
         </MapView>
         
         
