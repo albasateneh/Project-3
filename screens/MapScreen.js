@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, Image, Button } from 'react-native';
-import MapView, { PROVIDER_GOOGLE, Marker, Callout} from 'react-native-maps'
-import { SearchBar } from 'react-native-elements';
+import MapView, { PROVIDER_GOOGLE, Marker, Callout } from 'react-native-maps'
+import { SearchBar, Icon } from 'react-native-elements';
 import axios from 'axios';
 import CameraPage from './Camera'
 
@@ -29,19 +29,19 @@ class MapScreen extends Component {
     super(props);
     this.state = {
       locationInput: '',
-      locationCoordinates:  {
-          latitude: 37.7749,
-          longitude: -122.4194,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421
-        }
+      locationCoordinates: {
+        latitude: 37.7749,
+        longitude: -122.4194,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421
+      }
     };
 
     this.handleLocationInput = this.handleLocationInput.bind(this);
     this.handleLocationChange = this.handleLocationChange.bind(this);
   }
 
-  
+
 
   handleLocationInput(textInput) {
     this.setState({
@@ -49,8 +49,8 @@ class MapScreen extends Component {
     });
   }
 
-  updateLocationCoordinates(response){
-    var info = response.data.results[0].geometry.location 
+  updateLocationCoordinates(response) {
+    var info = response.data.results[0].geometry.location
     this.setState({
       locationCoordinates: {
         latitude: info.lat,
@@ -63,52 +63,65 @@ class MapScreen extends Component {
 
   handleSubmit(textInput) {
     axios.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + this.state.locationInput.split(' ').join('') + "&key=" + 'AIzaSyArlF_dWAiCAliK_BkP7yAgeqgtUcRMcW8')
-    .then(response => this.updateLocationCoordinates(response))
+      .then(response => this.updateLocationCoordinates(response))
   }
 
-  handleLocationChange(response){
+  handleLocationChange(response) {
     this.setState({
       locationCoordinates: response
     })
   }
-   
+
 
   render() {
     return (
       <View style={styles.container}>
-      <SearchBar 
-        placeholder="What's Lit?"
-       onChangeText={this.handleLocationInput}
-       value={this.state.locationInput}
-       onSubmitEditing={this.handleSubmit.bind(this)}
-         />
+
+        <SearchBar style={{borderTopWidth: 10}}
+        round
+          placeholder="What's Lit?"
+          onChangeText={this.handleLocationInput}
+          value={this.state.locationInput}
+          onSubmitEditing={this.handleSubmit.bind(this)}
+        />
         <MapView
           provider={PROVIDER_GOOGLE}
 
-          style={{ flex: 1}}
+          style={{ flex: 1 }}
           customMapStyle={mapStyle}
-          region={ this.state.locationCoordinates }
-         
+          region={this.state.locationCoordinates}
+
         >
-    <MapView.Marker
-    coordinate={this.state.locationCoordinates}
-    description=""
-    image={require('./Images/Fire-512.png')}
-    onPress={()=>this.props.navigation.navigate('Camera')}
-    >
-    
-  
+        {/*<View style={styles.cameraIcon}>
+        <Icon
+            reverse
+            name={'camera'}
+            type={'feather'}
+            color={'#FF5733'}/>
+    </View>*/}
+          
 
-    
-      </MapView.Marker>
+          <MapView.Marker
+            coordinate={this.state.locationCoordinates}
+            description=""
+            image={require('./Images/Fire-512.png')}
+            onPress={() => this.props.navigation.navigate('Camera')}
+          >
+
+
+
+
+          </MapView.Marker>
+
         </MapView>
-        
-        
 
-       {/*  <Text>
+
+
+
+        {/*  <Text>
           Location: {this.state.locationResult}
         </Text>*/}
-      
+
       </View>
     );
   }
@@ -302,9 +315,16 @@ const mapStyle = [
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    
+
   },
- 
+  cameraIcon: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    marginBottom: 36,
+    alignItems: 'center'
+
+  }
+
 });
 
 export default MapScreen;
