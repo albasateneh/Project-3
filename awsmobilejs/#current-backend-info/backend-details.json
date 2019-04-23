@@ -1,0 +1,165 @@
+{
+	"name": "RNExpoAuth",
+	"projectId": "55c01638-f4b9-4750-bfeb-8338bf51ed83",
+	"region": "us-east-2",
+	"state": "NORMAL",
+	"createdDate": "2019-04-18T02:18:33.675Z",
+	"lastUpdatedDate": "2019-04-18T02:21:09.156Z",
+	"consoleUrl": "https://console.aws.amazon.com/mobilehub/home#/55c01638-f4b9-4750-bfeb-8338bf51ed83/build",
+	"resources": [
+		{
+			"type": "AWS::Pinpoint::AnalyticsApplication",
+			"name": "rnexpoauth_MobileHub",
+			"arn": "f0843b38618f4ef4bf45dad6920ccc9c",
+			"feature": "analytics",
+			"attributes": {
+				"lastUpdateRequestID": "8fefca7a-fef1-4429-8119-117270534276"
+			}
+		},
+		{
+			"type": "AWS::IAM::Policy",
+			"name": "rnexpoauth_mobileanalytics_MOBILEHUB_458026103",
+			"arn": null,
+			"feature": "analytics",
+			"attributes": {
+				"authType": "authenticated",
+				"lastUpdateRequestID": "2f97aaf1-7fcb-4663-8391-97d7668ef0e4",
+				"role": "rnexpoauth_auth_MOBILEHUB_458026103"
+			}
+		},
+		{
+			"type": "AWS::IAM::Policy",
+			"name": "rnexpoauth_mobileanalytics_MOBILEHUB_458026103",
+			"arn": null,
+			"feature": "analytics",
+			"attributes": {
+				"authType": "unauthenticated",
+				"lastUpdateRequestID": "2f97aaf1-7fcb-4663-8391-97d7668ef0e4",
+				"role": "rnexpoauth_unauth_MOBILEHUB_458026103"
+			}
+		},
+		{
+			"type": "AWS::Cognito::IdentityPool",
+			"name": "rnexpoauth_MOBILEHUB_458026103",
+			"arn": "us-east-2:113973f2-9d2b-4d25-a798-71c512268cf1",
+			"feature": "user-signin",
+			"attributes": {
+				"lastUpdateRequestID": "2f97aaf1-7fcb-4663-8391-97d7668ef0e4",
+				"poolid": "us-east-2:113973f2-9d2b-4d25-a798-71c512268cf1",
+				"roleARNs": "arn:aws:iam::525171747197:role/rnexpoauth_auth_MOBILEHUB_458026103,arn:aws:iam::525171747197:role/rnexpoauth_unauth_MOBILEHUB_458026103"
+			}
+		},
+		{
+			"type": "AWS::IAM::Role",
+			"name": "rnexpoauth_smsverification_MOBILEHUB_458026103",
+			"arn": "arn:aws:iam::525171747197:role/service-role/rnexpoauth_smsverification_MOBILEHUB_458026103",
+			"feature": "user-signin",
+			"attributes": {
+				"lastUpdateRequestID": "2f97aaf1-7fcb-4663-8391-97d7668ef0e4",
+				"user-pools-role-key": "user-pools-execution-role"
+			}
+		},
+		{
+			"type": "AWS::Cognito::UserPool",
+			"name": "rnexpoauth_userpool_MOBILEHUB_458026103",
+			"arn": "us-east-2_lItglS0QG",
+			"feature": "user-signin",
+			"attributes": {
+				"alias-attributes": "[\"email\",\"phone_number\"]",
+				"lastUpdateRequestID": "2f97aaf1-7fcb-4663-8391-97d7668ef0e4",
+				"mfa-configuration": "ON",
+				"password-policy": "{\"minimumLength\":8,\"requireUppercase\":true,\"requireLowercase\":true,\"requireNumbers\":true,\"requireSymbols\":true}",
+				"region": "us-east-2",
+				"user-pools-client-id": "...redacted_1928381626...",
+				"user-pools-client-secret": "...redacted_1533708815...",
+				"user-pools-id": "us-east-2_lItglS0QG",
+				"user-pools-web-client-id": "53jknfhif3fhnu12l631d30d0e"
+			}
+		},
+		{
+			"type": "AWS::IAM::Role",
+			"name": "rnexpoauth_auth_MOBILEHUB_458026103",
+			"arn": "arn:aws:iam::525171747197:role/rnexpoauth_auth_MOBILEHUB_458026103",
+			"feature": "user-signin",
+			"attributes": {
+				"authType": "authenticated",
+				"lastUpdateRequestID": "2f97aaf1-7fcb-4663-8391-97d7668ef0e4"
+			}
+		},
+		{
+			"type": "AWS::IAM::Role",
+			"name": "rnexpoauth_unauth_MOBILEHUB_458026103",
+			"arn": "arn:aws:iam::525171747197:role/rnexpoauth_unauth_MOBILEHUB_458026103",
+			"feature": "user-signin",
+			"attributes": {
+				"authType": "unauthenticated",
+				"lastUpdateRequestID": "8fefca7a-fef1-4429-8119-117270534276"
+			}
+		},
+		{
+			"type": "AWS::S3::Bucket",
+			"name": "rnexpoauth-hosting-mobilehub-458026103",
+			"arn": null,
+			"feature": "hosting",
+			"attributes": {
+				"lastUpdateRequestID": "8fefca7a-fef1-4429-8119-117270534276",
+				"region": "us-east-2",
+				"s3-bucket-console-url": "https://s3.console.aws.amazon.com/s3/buckets/rnexpoauth-hosting-mobilehub-458026103",
+				"s3-bucket-website-url": "https://s3.amazonaws.com/rnexpoauth-hosting-mobilehub-458026103"
+			}
+		},
+		{
+			"type": "AWS::CloudFront::Distribution",
+			"name": "daoao8xktw6cd.cloudfront.net",
+			"arn": null,
+			"feature": "hosting",
+			"attributes": {
+				"id": "E2IB6GVXZKCZHO",
+				"lastUpdateRequestID": "8fefca7a-fef1-4429-8119-117270534276"
+			}
+		},
+		{
+			"type": "AWS::IAM::Policy",
+			"name": "rnexpoauth_hosting_MOBILEHUB_458026103",
+			"arn": null,
+			"feature": "hosting",
+			"attributes": {
+				"authType": "authenticated",
+				"lastUpdateRequestID": "2f97aaf1-7fcb-4663-8391-97d7668ef0e4",
+				"role": "rnexpoauth_auth_MOBILEHUB_458026103"
+			}
+		},
+		{
+			"type": "AWS::IAM::Policy",
+			"name": "rnexpoauth_hosting_MOBILEHUB_458026103",
+			"arn": null,
+			"feature": "hosting",
+			"attributes": {
+				"authType": "unauthenticated",
+				"lastUpdateRequestID": "2f97aaf1-7fcb-4663-8391-97d7668ef0e4",
+				"role": "rnexpoauth_unauth_MOBILEHUB_458026103"
+			}
+		},
+		{
+			"type": "AWS::S3::Bucket",
+			"name": "rnexpoauth-deployments-mobilehub-458026103",
+			"arn": null,
+			"feature": "common",
+			"attributes": {
+				"region": "us-east-2",
+				"s3-bucket-console-url": "https://s3.console.aws.amazon.com/s3/buckets/rnexpoauth-deployments-mobilehub-458026103"
+			}
+		},
+		{
+			"type": "AWS::CloudFormation::Stack",
+			"name": "Development",
+			"arn": null,
+			"feature": "cloud-api",
+			"attributes": {
+				"primary": "true",
+				"region": "us-east-2",
+				"stateSummary": "NOT_YET_DEPLOYED"
+			}
+		}
+	]
+}
