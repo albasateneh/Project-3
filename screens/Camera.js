@@ -70,12 +70,15 @@ export default class CameraPage extends React.Component {
             [
               {
                 text: 'Retake',
-                onPress: () => this.state.captures.length = 0,
+                onPress: () => {
+                    {/*navigate('View')*/}
+                    this.setState({captures : [], capturing: true});
+                },
                 style: 'cancel',
               },
-              {text: 'Post', onPress: () => this.state.captures.length = 0},
+              {text: 'Post', onPress: () => this.setState({captures : [], capturing: true})},
             ],
-            {cancelable: false},
+            {cancelable: true},
           );        
         this.setState({ 
             capturing: false,
