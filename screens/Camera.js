@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { Alert, View, Text, Button } from 'react-native';
 import { Camera, Permissions, Video, } from 'expo';
 
 import styles from './camera/styles';
@@ -10,7 +10,7 @@ export default class CameraPage extends React.Component {
     static navigationOptions= ({navigation})=>({
         title: 'Camera',
         headerRight:<Button
-        title="View Posts"
+        title=""
         onPress={()=>navigation.navigate('View')}
         />
     })
@@ -36,7 +36,22 @@ export default class CameraPage extends React.Component {
     handleShortCapture = async () => {
         console.log("short")
         const photoData = await this.camera.takePictureAsync();
-        this.setState({ capturing: false, captures: [photoData, ...this.state.captures] })
+        console.log(photoData);
+        Alert.alert(
+            'Done!',
+            'Would you like to Post?',
+            [
+              {
+                text: 'Retake',
+                onPress: () => this.state.captures.length = 0,
+                style: 'cancel',
+              },
+              {text: 'Post', onPress: () => this.state.captures.length = 0},
+            ],
+            {cancelable: false},
+          );        
+          this.setState({ capturing: false, captures: [photoData, ...this.state.captures]})
+          
     };
 
     handleLongCapture = async () => {
@@ -44,6 +59,19 @@ export default class CameraPage extends React.Component {
         const videoData = await this.camera.recordAsync();
         console.log("uber lel")
         console.log(videoData)
+        Alert.alert(
+            'Done!',
+            'Would you like to Post?',
+            [
+              {
+                text: 'Retake',
+                onPress: () => this.state.captures.length = 0,
+                style: 'cancel',
+              },
+              {text: 'Post', onPress: () => this.state.captures.length = 0},
+            ],
+            {cancelable: false},
+          );        
         this.setState({ 
             capturing: false,
             captures: [videoData, ...this.state.captures]
