@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 34070,
-  "expoServerNgrokUrl": "https://fq-xdy.samalba.project-3.exp.direct",
-  "packagerNgrokUrl": "https://packager.fq-xdy.samalba.project-3.exp.direct",
-  "ngrokPid": 34082
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }
