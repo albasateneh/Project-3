@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, View, StyleSheet, Image, Button } from 'react-native';
+import { Text, View, StyleSheet, Image, Button } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker, Callout } from 'react-native-maps'
 import { SearchBar, Icon } from 'react-native-elements';
 import axios from 'axios';
@@ -50,7 +50,7 @@ class MapScreen extends Component {
   }
 
   updateLocationCoordinates(response) {
-    var info = response.data.results[0].geometry.location;
+    var info = response.data.results[0].geometry.location
     this.setState({
       locationCoordinates: {
         latitude: info.lat,
@@ -64,9 +64,7 @@ class MapScreen extends Component {
   handleSubmit(textInput) {
     axios.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + this.state.locationInput.split(' ').join('') + "&key=" + 'AIzaSyArlF_dWAiCAliK_BkP7yAgeqgtUcRMcW8')
       .then(response => this.updateLocationCoordinates(response))
-      .catch(err => console.log(err))
   }
-
 
   handleLocationChange(response) {
     this.setState({
@@ -88,20 +86,19 @@ class MapScreen extends Component {
         />
         <MapView
           provider={PROVIDER_GOOGLE}
-          
+
           style={{ flex: 1 }}
           customMapStyle={mapStyle}
           region={this.state.locationCoordinates}
 
         >
-        {/*<TouchableOpacity style={styles.cameraIcon}
-        >
+        {/*<View style={styles.cameraIcon}>
         <Icon
             reverse
             name={'camera'}
             type={'feather'}
             color={'#FF5733'}/>
-    </TouchableOpacity>*/}
+    </View>*/}
           
 
           <MapView.Marker

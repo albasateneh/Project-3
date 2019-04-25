@@ -1,12 +1,15 @@
 import React from 'react';
 import { Alert, View, Text, Button } from 'react-native';
 import { Camera, Permissions, Video, } from 'expo';
-
+import * as firebase from 'firebase';
 import styles from './camera/styles';
 import Toolbar from './camera/toolbar.component';
 import Gallery from './camera/gallery.component';
 
+
+
 export default class CameraPage extends React.Component {
+    
     static navigationOptions= ({navigation})=>({
         title: 'Camera',
         headerRight:<Button
@@ -14,6 +17,7 @@ export default class CameraPage extends React.Component {
         onPress={()=>navigation.navigate('View')}
         />
     })
+    
     camera = null;
 
     state = {
@@ -33,31 +37,53 @@ export default class CameraPage extends React.Component {
             this.camera.stopRecording();
     };
 
+    
     handleShortCapture = async () => {
         console.log("short")
         const { navigation } = this.props;
         const { navigate } = navigation;
         const photoData = await this.camera.takePictureAsync();
-        console.log(photoData);
+        console.log(photoData.uri);
         Alert.alert(
             'Done!',
             'Would you like to Post?',
             [
-              {
-                text: 'Retake',
-                onPress: () => {
-                    {/*navigate('View')*/}
-                    this.setState({captures : [], capturing: true});
-                },
-                style: 'cancel',
+                {
+                    text: 'Retake',
+                    onPress: () => {
+                        {/*navigate('View')*/}
+                        this.setState({captures : [], capturing: true});
+                    },
+                    style: 'cancel',
               },
-              {text: 'Post', onPress: () => this.setState({captures : [], capturing: true})},
+              {
+                  text: 'Post', onPress: () => {
+                    {/*navigate('View')*/}
+                    if(!photoData.cancelled) {
+                        this.uploadImage(photoData.uri, "lit_pics" )
+                        .then(() => {(console.log('success'))
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        })
+                    }
+                }
+                },
             ],
             {cancelable: true},
           );        
           this.setState({ capturing: false, captures: [photoData, ...this.state.captures]})
           
     };
+    uploadImage = async (uri, imageName) => {
+        const response = await fetch(uri);
+        //console.log(response);
+        const blob = await response.blob();
+
+        var ref = firebase.storage().ref().child("images/" + imageName);
+        return ref.put(blob);
+    }
+
 
     handleLongCapture = async () => {
         console.log("lel")

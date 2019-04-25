@@ -1,4 +1,0 @@
-import React, {Component} from 'react';
-import { StyleSheet, View, Text, Touchable Opacity } from 'react-native';
-
-class renderButton extends default 
