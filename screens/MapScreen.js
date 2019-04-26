@@ -91,7 +91,7 @@ class MapScreen extends Component {
           customMapStyle={mapStyle}
           region={this.state.locationCoordinates}
 
-        >
+         />
         {/*<View style={styles.cameraIcon}>
         <Icon
             reverse
@@ -102,22 +102,11 @@ class MapScreen extends Component {
           
 
           <MapView.Marker
-            coordinate={this.state.locationCoordinates}
-            description=""
-            image={require('./Images/Fire-512.png')}
-            onPress={() => this.props.navigation.navigate('Camera')}
-          >
-
-
-
-
-          </MapView.Marker>
-
-        </MapView>
-
-
-
-
+           coordinate={this.state.locationCoordinates}
+           description=""
+           image={require('./Images/Fire-512.png')}
+           onPress={() => this.props.navigation.navigate('View')}
+          />
         {/*  <Text>
           Location: {this.state.locationResult}
         </Text>*/}

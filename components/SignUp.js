@@ -65,9 +65,9 @@ export default class App extends React.Component {
           placeholderTextColor='#9E9E9E'
         />
         <Button 
-        title='Sign-Up'
-        onPress={this.signUp.bind(this)}
-        color='#EF6C00'
+          title='Sign-Up'
+          onPress={this.signUp.bind(this)}
+          color='#EF6C00'
         />
         <TextInput 
           onChangeText={value => this.onChangeText('confirmationCode', value)}
@@ -76,10 +76,11 @@ export default class App extends React.Component {
           placeholderTextColor='#9E9E9E'
         />
         <Button 
-        title='Confirm'
-        onPress={this.confirmSignUp.bind(this)}
-        color='#EF6C00'
+          title='Confirm'
+          onPress={this.confirmSignUp.bind(this)}
+          color='#EF6C00'
         />
+        <Text style={styles.copyright}>Copyright © 2019 What's Lit</Text>
       </View>
     );
   }
@@ -98,4 +99,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#424242',
     justifyContent: 'center',
   },
+  copyright: {
+    color: "#9E9E9E",
+    textAlign: 'center',
+    textDecorationLine: 'underline',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 1
+  },
+  logo: {
+    
+  }
 });

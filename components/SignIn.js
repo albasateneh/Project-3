@@ -1,6 +1,7 @@
 import React from 'react';
 import { TextInput, Button, StyleSheet, Text, View } from 'react-native';
 import { Auth } from 'aws-amplify'
+import Logo from ''
 
 export default class App extends React.Component {
   state = {
@@ -51,9 +52,9 @@ export default class App extends React.Component {
           style={styles.input}
         />
         <Button 
-        title='Sign-In'
-        onPress={this.signIn.bind(this)}
-        color='#EF6C00'
+          title='Sign-In'
+          onPress={this.signIn.bind(this)}
+          color='#EF6C00'
         />
         <TextInput 
           onChangeText={value => this.onChangeText('confirmationCode', value)}
@@ -62,10 +63,11 @@ export default class App extends React.Component {
           style={styles.input}
         />
         <Button 
-        title='Confirm'
-        onPress={this.confirmSignIn.bind(this)}
-        color='#EF6C00'
+          title='Confirm'
+          onPress={this.confirmSignIn.bind(this)}
+          color='#EF6C00'
         />
+        <Text style={styles.copyright}>Copyright © 2019 What's Lit</Text>
       </View>
     );
   }
@@ -83,5 +85,17 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#424242',
     justifyContent: 'center',
+  },
+  copyright: {
+    color: "#9E9E9E",
+    textAlign: 'center',
+    textDecorationLine: 'underline',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 1
+  },
+  logo: {
+
   }
 });
