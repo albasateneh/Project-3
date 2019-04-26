@@ -28,23 +28,24 @@ export default class App extends React.Component {
   }
   
   render() {
-    if (this.state.isAuthenticated) {
+   /**  if (this.state.isAuthenticated) {
       console.log("Auth: ", Auth)
       return(
         // <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
         //   <Text>Hello {Auth.user.username}!</Text>
         // </View>
-        <Container />
       )
-    }
+    }*/
     return (
-      <View style={styles.container}>
+      <Container />
+
+     /**  <View style={styles.container}>
         <Tabs 
         screenProps={{
           authenticate: this.authenticate.bind(this)
         }}
         />
-      </View>
+      </View>*/
     );
   }
 }

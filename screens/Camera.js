@@ -1,6 +1,6 @@
 import React from 'react';
 import { Alert, View, Text, Button } from 'react-native';
-import { Camera, Permissions, Video, } from 'expo';
+import { Camera, Permissions, ImageManipulator, } from 'expo';
 import * as firebase from 'firebase';
 import styles from './camera/styles';
 import Toolbar from './camera/toolbar.component';
@@ -43,7 +43,12 @@ export default class CameraPage extends React.Component {
         const { navigation } = this.props;
         const { navigate } = navigation;
         const photoData = await this.camera.takePictureAsync();
-        console.log(photoData.uri);
+        let resizedPhoto = await ImageManipulator.manipulateAsync(
+            photoData.uri,
+            [{ resize: { width: 100, height: 100 } }],
+            { compress: 0, format: "jpg", base64: true }
+        );
+        console.log(resizedPhoto.uri);
         Alert.alert(
             'Done!',
             'Would you like to Post?',
@@ -75,11 +80,28 @@ export default class CameraPage extends React.Component {
           this.setState({ capturing: false, captures: [photoData, ...this.state.captures]})
           
     };
-    uploadImage = async (uri, imageName) => {
-        const response = await fetch(uri);
-        //console.log(response);
-        const blob = await response.blob();
 
+    _urlToBlob(url) {
+        return new Promise((resolve, reject) => {
+            var xhr = new XMLHttpRequest();
+            xhr.onerror = reject;
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4) {
+                    resolve(xhr.response);
+                }
+            };
+            xhr.open('GET', url);
+            xhr.responseType = 'blob'; // convert type
+            xhr.send();
+        })
+    }    
+
+    uploadImage = async (uri, imageName) => {
+        let response = await fetch(uri);
+        let newResponse = response.url
+        console.log("asdfasdfasdf " + newResponse)
+        //console.log(response);
+        const blob = await this._urlToBlob(newResponse);
         var ref = firebase.storage().ref().child("images/" + imageName);
         return ref.put(blob);
     }
@@ -156,5 +178,6 @@ export default class CameraPage extends React.Component {
                 
             </React.Fragment>
         );
+        
     };
 };
