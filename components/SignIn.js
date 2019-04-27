@@ -15,8 +15,8 @@ export default class App extends React.Component {
     Auth.signIn(username, password)
     .then((user) => {
       this.setState({ user });
-      
-      AlertIOS.alert("Succesful sign in", "Please confirm your confirmation code below.", 
+
+      AlertIOS.alert("Successful sign in", "Please confirm your confirmation code below.", 
       [
         {
           text: 'Dismiss',
@@ -79,7 +79,7 @@ export default class App extends React.Component {
             style={styles.input}
           />
           <Button 
-            title='Confirm'
+            title="See What's Lit!"
             onPress={this.confirmSignIn.bind(this)}
             color='#EF6C00'
           />

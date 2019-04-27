@@ -7,9 +7,8 @@ function isMovie(uri) {
     return ext === 'mov' || ext === 'mp4' || ext === 'avi'
 }
 export default ({ captures = [] }) => (
-    <ScrollView
-        horizontal={true}
-        style={[styles.bottomToolbar, styles.galleryContainer]}
+    <View
+        
     >
         {captures.map(({ uri }) => (
             <View style={styles.galleryImageContainer} key={uri}>
@@ -29,5 +28,5 @@ export default ({ captures = [] }) => (
                 }
             </View>
         ))}
-    </ScrollView>
+    </View>
 );

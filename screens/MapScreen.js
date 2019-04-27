@@ -90,38 +90,42 @@ class MapScreen extends Component {
           style={{ flex: 1 }}
           customMapStyle={mapStyle}
           region={this.state.locationCoordinates}
-          >
+
+        >
+        {/*<View style={styles.cameraIcon}>
+        <Icon
+            reverse
+            name={'camera'}
+            type={'feather'}
+            color={'#FF5733'}/>
+    </View>*/}
+          
 
           <MapView.Marker
-           coordinate={this.state.locationCoordinates}
-           title=""
-           description=""
-           image={require('./Images/Fire-512.png')}
-           onPress={() => this.props.navigation.navigate('View')}
-          />
+            coordinate={this.state.locationCoordinates}
+            description=""
+            image={require('./Images/Fire-512.png')}
+            onPress={() => this.props.navigation.navigate('View')}
+          >
+
+
+
+
+          </MapView.Marker>
 
         </MapView>
 
-      </View>
 
-      );
-    }
-  }
-         {/*<View style={styles.cameraIcon}>
-    //     <Icon
-    //         reverse
-    //         name={'camera'}
-    //         type={'feather'}
-    //         color={'#FF5733'}/>
-    // </View>*/}
-          
 
-          
-         {/* <Text>
+
+        {/*  <Text>
           Location: {this.state.locationResult}
-        </Text> */}
-      
-  
+        </Text>*/}
+
+      </View>
+    );
+  }
+}
 const mapStyle = [
   {
     "elementType": "geometry",
