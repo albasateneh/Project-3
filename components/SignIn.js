@@ -1,7 +1,6 @@
 import React from 'react';
-import { TextInput, Button, StyleSheet, Text, View } from 'react-native';
-import { Auth } from 'aws-amplify'
-import Logo from ''
+import { TextInput, Button, StyleSheet, Text, View, AlertIOS, Image} from 'react-native';
+import { Auth } from 'aws-amplify';
 
 export default class App extends React.Component {
   state = {
@@ -15,9 +14,17 @@ export default class App extends React.Component {
     const { username, password } = this.state
     Auth.signIn(username, password)
     .then((user) => {
-        this.setState({ user })
-        console.log('successful sign in!')})
-    .catch(e => console.log('error signing in!: ', e))
+      this.setState({ user });
+      AlertIOS.alert("Succesful sign in!", "Please confirm your confirmation code below.", 
+      [
+        {
+          text: 'Dismiss',
+          style: "default"
+        }
+      ]);
+      console.log('successful sign in!')
+    })
+      .catch(e => console.log('error signing in!: ', e))
   }
 
   confirmSignIn(){
@@ -38,6 +45,9 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        {/* <Image 
+          source={require('../assets/images/WhatsLitLogo.png')}
+        /> */}
         <TextInput 
           onChangeText={value => this.onChangeText('username', value)}
           placeholder='Username'
@@ -97,5 +107,8 @@ const styles = StyleSheet.create({
   },
   logo: {
 
+  },
+  button: {
+    color:'#EF6C00'
   }
 });
