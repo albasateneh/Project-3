@@ -25,7 +25,8 @@ export default class CameraPage extends React.Component {
         capturing: null,
         hasCameraPermission: null,
         cameraType: Camera.Constants.Type.back,
-        flashMode: Camera.Constants.FlashMode.off
+        flashMode: Camera.Constants.FlashMode.off,
+        image: ''
         };
 
     setFlashMode = (flashMode) => this.setState({ flashMode });
@@ -66,7 +67,7 @@ export default class CameraPage extends React.Component {
                     {/*navigate('View')*/}
                     if(!photoData.cancelled) {
                         this.uploadImage(photoData.uri, "lit_pics" )
-                        .then(() => {(console.log('success'))
+                        .then(() => {navigate('View')
                         })
                         .catch((error) => {
                             console.log(error);
@@ -103,8 +104,11 @@ export default class CameraPage extends React.Component {
         //console.log(response);
         const blob = await this._urlToBlob(newResponse);
         var ref = firebase.storage().ref().child("images/" + imageName);
-        return ref.put(blob);
+       const pic = await ref.getDownloadURL().then((url) => console.log("this the mutha fuckin url " + url))
+
+        return ref.put(blob); 
     }
+    
 
 
     handleLongCapture = async () => {

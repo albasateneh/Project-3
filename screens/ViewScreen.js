@@ -1,6 +1,7 @@
 import React from 'react';
 import {Text, View, StyleSheet, Button} from 'react-native'
 import {Icon} from 'react-native-elements'
+
 export default class ViewScreen extends React.Component {
 
   static navigationOptions= ({navigation})=>({
