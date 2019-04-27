@@ -91,9 +91,10 @@ class MapScreen extends Component {
           customMapStyle={mapStyle}
           region={this.state.locationCoordinates}
           >
-          
+
           <MapView.Marker
            coordinate={this.state.locationCoordinates}
+           title=""
            description=""
            image={require('./Images/Fire-512.png')}
            onPress={() => this.props.navigation.navigate('View')}

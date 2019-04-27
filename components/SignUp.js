@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput, Button, StyleSheet, Text, View, AlertIOS } from 'react-native';
+import { TextInput, Button, StyleSheet, Text, View, AlertIOS, Image } from 'react-native';
 import Amplify, { Auth } from 'aws-amplify'
 
 export default class App extends React.Component {
@@ -58,6 +58,10 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <Image 
+          source={require('../assets/images/candle.png')}
+          style={styles.logo}
+        />
         <TextInput 
           onChangeText={value => this.onChangeText('username', value)}
           style={styles.input}
@@ -110,7 +114,7 @@ const styles = StyleSheet.create({
     height: 50,
     borderBottomWidth: 2,
     borderBottomColor: "#E0E0E0",
-    margin: 10,
+    margin: 15,
     color: "#E0E0E0"
   },
   container: {
@@ -128,6 +132,12 @@ const styles = StyleSheet.create({
     bottom: 1
   },
   logo: {
-    
+    display: "block",
+    height: "18%",
+    width: "25.5%",
+    bottom: "1%",
+    position: "fixed",
+    marginLeft: "auto",
+    marginRight: "auto"
   }
 });

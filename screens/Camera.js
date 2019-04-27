@@ -1,10 +1,13 @@
 import React from 'react';
 import { Alert, View, Text, Button } from 'react-native';
-import { Camera, Permissions, Video, } from 'expo';
+import { Camera, Permissions, ImageManipulator, } from 'expo';
 import * as firebase from 'firebase';
 import styles from './camera/styles';
 import Toolbar from './camera/toolbar.component';
 import Gallery from './camera/gallery.component';
+
+
+
 export default class CameraPage extends React.Component {
     
     static navigationOptions= ({navigation})=>({
@@ -16,27 +19,37 @@ export default class CameraPage extends React.Component {
     })
     
     camera = null;
+
     state = {
         captures: [],
         capturing: null,
         hasCameraPermission: null,
         cameraType: Camera.Constants.Type.back,
-        flashMode: Camera.Constants.FlashMode.off
+        flashMode: Camera.Constants.FlashMode.off,
+        image: ''
         };
+
     setFlashMode = (flashMode) => this.setState({ flashMode });
     setCameraType = (cameraType) => this.setState({ cameraType });
     handleCaptureIn = () => this.setState({ capturing: true });
+
     handleCaptureOut = () => {
         if (this.state.capturing)
             this.camera.stopRecording();
     };
+
     
     handleShortCapture = async () => {
         console.log("short")
         const { navigation } = this.props;
         const { navigate } = navigation;
         const photoData = await this.camera.takePictureAsync();
-        console.log(photoData.uri);
+        let resizedPhoto = await ImageManipulator.manipulateAsync(
+            photoData.uri,
+            [{ resize: { width: 100, height: 100 } }],
+            { compress: 0, format: "jpg", base64: true }
+        );
+        console.log(resizedPhoto.uri);
         Alert.alert(
             'Done!',
             'Would you like to Post?',
@@ -54,7 +67,7 @@ export default class CameraPage extends React.Component {
                     {/*navigate('View')*/}
                     if(!photoData.cancelled) {
                         this.uploadImage(photoData.uri, "lit_pics" )
-                        .then(() => {(console.log('success'))
+                        .then(() => {navigate('View')
                         })
                         .catch((error) => {
                             console.log(error);
@@ -68,13 +81,37 @@ export default class CameraPage extends React.Component {
           this.setState({ capturing: false, captures: [photoData, ...this.state.captures]})
           
     };
+
+    _urlToBlob(url) {
+        return new Promise((resolve, reject) => {
+            var xhr = new XMLHttpRequest();
+            xhr.onerror = reject;
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4) {
+                    resolve(xhr.response);
+                }
+            };
+            xhr.open('GET', url);
+            xhr.responseType = 'blob'; // convert type
+            xhr.send();
+        })
+    }    
+
     uploadImage = async (uri, imageName) => {
-        const response = await fetch(uri);
+        let response = await fetch(uri);
+        let newResponse = response.url
+        console.log("asdfasdfasdf " + newResponse)
         //console.log(response);
-        const blob = await response.blob();
+        const blob = await this._urlToBlob(newResponse);
         var ref = firebase.storage().ref().child("images/" + imageName);
-        return ref.put(blob);
+       const pic = await ref.getDownloadURL()
+       .then((url) => console.log("this the mutha fuckin url " + url))
+
+        return ref.put(blob); 
     }
+    
+
+
     handleLongCapture = async () => {
         console.log("lel")
         const videoData = await this.camera.recordAsync();
@@ -101,19 +138,24 @@ export default class CameraPage extends React.Component {
             captures: [videoData, ...this.state.captures]
         });
     };
+
     async componentDidMount() {
         const camera = await Permissions.askAsync(Permissions.CAMERA);
         const audio = await Permissions.askAsync(Permissions.AUDIO_RECORDING);
         const hasCameraPermission = (camera.status === 'granted' && audio.status === 'granted');
+
         this.setState({ hasCameraPermission });
     };
+
     render() {
         const { hasCameraPermission, flashMode, cameraType, capturing, captures } = this.state;
+
         if (hasCameraPermission === null) {
             return <View />;
         } else if (hasCameraPermission === false) {
             return <Text>Access to camera has been denied.</Text>;
         }
+
         return (
             <React.Fragment>
                 <View>
@@ -124,7 +166,9 @@ export default class CameraPage extends React.Component {
                         ref={camera => this.camera = camera}
                     />
                 </View>
+
                 {captures.length > 0 && <Gallery captures={captures} />}
+
                 <Toolbar
                     capturing={capturing}
                     flashMode={flashMode}
@@ -139,5 +183,6 @@ export default class CameraPage extends React.Component {
                 
             </React.Fragment>
         );
+        
     };
 };

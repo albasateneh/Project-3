@@ -15,7 +15,8 @@ export default class App extends React.Component {
     Auth.signIn(username, password)
     .then((user) => {
       this.setState({ user });
-      AlertIOS.alert("Succesful sign in!", "Please confirm your confirmation code below.", 
+      
+      AlertIOS.alert("Succesful sign in", "Please confirm your confirmation code below.", 
       [
         {
           text: 'Dismiss',
@@ -44,39 +45,47 @@ export default class App extends React.Component {
   
   render() {
     return (
-      <View style={styles.container}>
-        {/* <Image 
-          source={require('../assets/images/WhatsLitLogo.png')}
-        /> */}
-        <TextInput 
-          onChangeText={value => this.onChangeText('username', value)}
-          placeholder='Username'
-          placeholderTextColor='#9E9E9E'
-          style={styles.input}
+      <View style={styles.view}>
+        <Image 
+          source={require('../assets/images/candle.png')}
+          style={styles.logo}
         />
-        <TextInput 
-          onChangeText={value => this.onChangeText('password', value)}
-          secureTextEntry={true}
-          placeholder='Password'
-          placeholderTextColor='#9E9E9E'
-          style={styles.input}
-        />
-        <Button 
-          title='Sign-In'
-          onPress={this.signIn.bind(this)}
-          color='#EF6C00'
-        />
-        <TextInput 
-          onChangeText={value => this.onChangeText('confirmationCode', value)}
-          placeholder='Enter 6-Digit Code'
-          placeholderTextColor='#9E9E9E'
-          style={styles.input}
-        />
-        <Button 
-          title='Confirm'
-          onPress={this.confirmSignIn.bind(this)}
-          color='#EF6C00'
-        />
+        <Text style={styles.title}>
+          What's Lit!
+        </Text>
+        <View style={styles.container}>
+          <TextInput 
+            onChangeText={value => this.onChangeText('username', value)}
+            placeholder='Username'
+            placeholderTextColor='#9E9E9E'
+            style={styles.input}
+          />
+          <TextInput 
+            onChangeText={value => this.onChangeText('password', value)}
+            secureTextEntry={true}
+            placeholder='Password'
+            placeholderTextColor='#9E9E9E'
+            style={styles.input}
+          />
+          <Button 
+            title='Sign-In'
+            onPress={this.signIn.bind(this)}
+            color='#EF6C00'
+          />
+          <TextInput 
+            onChangeText={value => this.onChangeText('confirmationCode', value)}
+            placeholder='Enter 6-Digit Code'
+            placeholderTextColor='#9E9E9E'
+            style={styles.input}
+          />
+          <Button 
+            title='Confirm'
+            onPress={this.confirmSignIn.bind(this)}
+            color='#EF6C00'
+          />
+
+        </View>
+        
         <Text style={styles.copyright}>Copyright © 2019 What's Lit</Text>
       </View>
     );
@@ -85,13 +94,13 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   input: {
-    height: 50,
+    height: 70,
     borderBottomWidth: 2,
     borderBottomColor: "#E0E0E0",
-    margin: 10,
+    margin: 16,
     color: '#E0E0E0'
   },
-  container: {
+  view: {
     flex: 1,
     backgroundColor: '#424242',
     justifyContent: 'center',
@@ -105,10 +114,26 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 1
   },
-  logo: {
-
+  title: {
+    color: "#E0E0E0",
+    alignSelf: "center",
+    fontFamily: "PartyLetPlain",
+    fontWeight: "bold",
+    fontSize: "40%",
+    bottom: "5%",
+    paddingBottom: "1%"
   },
-  button: {
-    color:'#EF6C00'
+  logo: {
+    display: "block",
+    position: "fixed",
+    top: "1%",
+    height: "18%",
+    width: "25.5%",
+    marginBottom: "20%",
+    marginLeft: "auto",
+    marginRight: "auto"
+  },
+  container: {
+    bottom: "5%"
   }
 });
