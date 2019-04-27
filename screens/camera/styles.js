@@ -44,15 +44,15 @@ export default StyleSheet.create({
         borderColor: "transparent",
     },
     galleryContainer: { 
-        bottom: 100 
+flex: 1,
+alignItems: 'stretch'
     },
     galleryImageContainer: { 
-        width: 75, 
-        height: 75, 
-        marginRight: 5 
+        width: '100%', 
+        height: '100%'
     },
     galleryImage: { 
-        width: 75, 
-        height: 75 
+        width: '100%', 
+        height: '100%'
     }
 });

@@ -21,7 +21,7 @@ export default class App extends React.Component {
       }
     })
     .then(() => {
-      AlertIOS.alert("Succesful sign up!", "Please confirm your confirmation code below.", 
+      AlertIOS.alert("Successful sign up!", "Please enter the code sent to your phone below.", 
       [
         {
           text: 'Dismiss',
@@ -36,7 +36,7 @@ export default class App extends React.Component {
   confirmSignUp(){
     Auth.confirmSignUp(this.state.username, this.state.confirmationCode)
     .then(() => {
-      AlertIOS.alert("Confirmed!", "Login to see What's Lit!", 
+      AlertIOS.alert("Verified!", "Login to see What's Lit!", 
       [
         {
           text: 'Login',
@@ -99,7 +99,7 @@ export default class App extends React.Component {
           placeholderTextColor='#9E9E9E'
         />
         <Button 
-          title='Confirm'
+          title='Verify'
           onPress={this.confirmSignUp.bind(this)}
           color='#EF6C00'
         />
